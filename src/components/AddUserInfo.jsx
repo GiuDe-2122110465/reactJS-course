@@ -33,7 +33,12 @@ class UserInfo extends React.Component {
     HandleOnSubmit = (event) =>
     {
         event.preventDefault();
-        console.log(this.state);
+        console.log(this.state)
+        this.props.HandleAddNewUser({
+            id: Math.floor((Math.random()*100) - 1) + ' random',
+            name:this.state.name,
+            age:this.state.age,
+        })
     }
     render() 
     {

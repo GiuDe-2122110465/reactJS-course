@@ -1,5 +1,5 @@
 import React from "react";
-import UserInfo from "./UserInfo";
+import AddUserInfo from "./AddUserInfo";
 import DisplayInfo from "./DisplayInfo";
 class MyComponent extends React.Component 
 {
@@ -15,19 +15,31 @@ class MyComponent extends React.Component
 
     ]
    }
+   HandleAddNewUser = (userObj)=>{
+    console.log('check',userObj)
+    this.setState({
+        lisUser:[userObj,...this.state.lisUser]
+    })
+   }
+   HandleDeleteUser=(UserId)=> {
+    let lisUserClone = this.state.lisUser;
+    lisUserClone = lisUserClone.filter(item=>item.id !== UserId )
+    this.setState({
+      lisUser: lisUserClone  
+    })
+   }
     render()
     {
         //DRY
         return (
-            <div>
-                
-               
-            <UserInfo></UserInfo>
-    
-            <DisplayInfo 
-                lisUser={this.state.lisUser} 
-            />
-            </div>
+            <>
+                <AddUserInfo  HandleAddNewUser = {this.HandleAddNewUser}/>
+                <DisplayInfo 
+                    lisUser={this.state.lisUser} 
+                    HandleDeleteUser={this.HandleDeleteUser}
+                    />
+            </>
+            
         );
 
     }

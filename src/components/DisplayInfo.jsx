@@ -1,5 +1,6 @@
 import React from "react";
-
+import '../components/DisplayInfor.scss'
+import react from "../assets/react.svg";
 class DisplayInfo extends React.Component {
     state={
         isShowListUser:true
@@ -14,11 +15,12 @@ class DisplayInfo extends React.Component {
     const {lisUser} = this.props;
     console.log("check map user",lisUser)
     return (
-        <div>
+        <div className="display-infor-container">
+            <img src={react} alt="" />
             <div>
-                <span onClick={()=>{this.HandleShowHide()}}>
+                <button onClick={()=>{this.HandleShowHide()}}>
                     {(this.state.isShowListUser===true) ? 'ẩn user' : 'hiện user'}
-                </span>
+                </button>
             </div>
             {this.state.isShowListUser && 
                 <div> 
@@ -26,8 +28,11 @@ class DisplayInfo extends React.Component {
                         return (
                             <div key={user.id} className={+user.age>18 ? "green" : "red"}>
                                 <hr />
-                                <div>my name is {user.name}</div>
-                                <div>my age is {user.age}</div>
+                                <div  >my name is: {user.name}</div>
+                                <div>my age is: {user.age}</div>
+                                <button onClick={()=>{
+                                    this.props.HandleDeleteUser(user.id)
+                                }}>xóa</button>
                                 <hr />
                             </div>
                             
